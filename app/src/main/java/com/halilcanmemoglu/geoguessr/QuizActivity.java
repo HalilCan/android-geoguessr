@@ -1,5 +1,6 @@
 package com.halilcanmemoglu.geoguessr;
 
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -133,9 +134,17 @@ public class QuizActivity extends AppCompatActivity {
     }
 
     private void nextQuestion(){
-        mQuestionBank[mCurrentIndex].setVisible(false);
-        mCurrentIndex = (mCurrentIndex + 1) % mQuestionBank.length;
-        updateQuestion();
+        if (mCorrect + mWrong == mQuestionBank.length) {
+            String toastMessage = mCorrect.toString()+ "/" + mQuestionBank.length + "Correct!";
+            Toast endToast = Toast.makeText(QuizActivity.this, toastMessage,
+                    Toast.LENGTH_SHORT);
+        /*currentToast.setGravity(Gravity.CENTER,0,0);*/
+            endToast.show();
+        } else {
+            mQuestionBank[mCurrentIndex].setVisible(false);
+            mCurrentIndex = (mCurrentIndex + 1) % mQuestionBank.length;
+            updateQuestion();
+        }
     }
 
     private void checkAnswer(boolean userPressedTrue) {
@@ -157,4 +166,5 @@ public class QuizActivity extends AppCompatActivity {
         /*currentToast.setGravity(Gravity.CENTER,0,0);*/
         currentToast.show();
     }
+
 }
