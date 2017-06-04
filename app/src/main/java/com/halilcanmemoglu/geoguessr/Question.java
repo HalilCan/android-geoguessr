@@ -10,10 +10,12 @@ import android.widget.TextView;
 public class Question {
     private int mTextResId;
     private boolean mAnswerTrue;
+    private boolean mVisible;
 
-    public Question(int textResId, boolean answerTrue) {
+    public Question(int textResId, boolean answerTrue, boolean visible) {
         mTextResId = textResId;
         mAnswerTrue = answerTrue;
+        mVisible = visible;
     }
 
     public int getTextResId() {
@@ -28,8 +30,16 @@ public class Question {
         return mAnswerTrue;
     }
 
+
     public void setAnswerTrue(boolean answerTrue) {
         mAnswerTrue = answerTrue;
     }
 
+    public boolean isVisible() {
+        return mVisible;
+    }
+
+    public void setVisible(boolean visible) {
+        mVisible = visible;
+    }
 }

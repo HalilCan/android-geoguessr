@@ -10,10 +10,15 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.Arrays;
+import java.util.List;
+
 public class QuizActivity extends AppCompatActivity {
     private static final String TAG = "QuizActivity";
     private static final String KEY_INDEX = "index";
 
+    private Integer mCorrect = 0;
+    private Integer mWrong = 0;
     private Button mTrueButton;
     private Button mFalseButton;
     private ImageButton mNextButton;
@@ -21,12 +26,12 @@ public class QuizActivity extends AppCompatActivity {
     private TextView mQuestionTextView;
 
     private Question[] mQuestionBank = new Question[]{
-            new Question(R.string.question_africa, false),
-            new Question(R.string.question_australia, true),
-            new Question(R.string.question_oceans, true),
-            new Question(R.string.question_mideast, false),
-            new Question(R.string.question_americas, true),
-            new Question(R.string.question_asia, true),
+            new Question(R.string.question_africa, false, true),
+            new Question(R.string.question_australia, true, true),
+            new Question(R.string.question_oceans, true, true),
+            new Question(R.string.question_mideast, false, true),
+            new Question(R.string.question_americas, true, true),
+            new Question(R.string.question_asia, true, true),
     };
 
     private int mCurrentIndex = 0;
@@ -118,10 +123,20 @@ public class QuizActivity extends AppCompatActivity {
 
 
     private void updateQuestion() {
-        int question = mQuestionBank[mCurrentIndex].getTextResId();
-        mQuestionTextView.setText(question);
+        if (mQuestionBank[mCurrentIndex].isVisible()) {
+            int question = mQuestionBank[mCurrentIndex].getTextResId();
+            mQuestionTextView.setText(question);
+        } else {
+            mCurrentIndex = (mCurrentIndex + 1) % mQuestionBank.length;
+            updateQuestion();
+        }
     }
 
+    private void nextQuestion(){
+        mQuestionBank[mCurrentIndex].setVisible(false);
+        mCurrentIndex = (mCurrentIndex + 1) % mQuestionBank.length;
+        updateQuestion();
+    }
 
     private void checkAnswer(boolean userPressedTrue) {
         boolean answerIsTrue = mQuestionBank[mCurrentIndex].isAnswerTrue();
@@ -130,8 +145,12 @@ public class QuizActivity extends AppCompatActivity {
 
         if (userPressedTrue == answerIsTrue) {
             messageResId = R.string.correct_toast;
+            mCorrect += 1;
+            nextQuestion();
         } else {
             messageResId = R.string.incorrect_toast;
+            mWrong += 1;
+            nextQuestion();
         }
         Toast currentToast = Toast.makeText(QuizActivity.this, messageResId,
                 Toast.LENGTH_SHORT);
