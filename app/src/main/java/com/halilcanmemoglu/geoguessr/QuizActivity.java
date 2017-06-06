@@ -52,7 +52,7 @@ public class QuizActivity extends AppCompatActivity {
             }
         });
     String Branch = "Main";
-        //mNextButton = (ImageButton) findViewById(R.id.next_button);
+        mNextButton = (ImageButton) findViewById(R.id.next_button);
         mNextButton.setOnClickListener(new View.OnClickListener() {
             @Override
                 public void onClick(View v) {
@@ -70,9 +70,7 @@ public class QuizActivity extends AppCompatActivity {
             }
         });
 
-
-        //mTrueButton = (Button) findViewById(R.id.true_button);
-        mTrueButton = (Button) findViewById(R.id.question_text_view);
+        mTrueButton = (Button) findViewById(R.id.true_button);
         mTrueButton.setOnClickListener(new View.OnClickListener(){
             @Override
                 public void onClick(View v){
