@@ -7,6 +7,11 @@
     <string name="correct_toast">Correct!</string>
     <string name="incorrect_toast">wrong :(</string>
 
+    <string name="warning_text">Are you sure you want to do this?</string>
+    <string name="show_answer_button">Show Answer</string>
+    <string name="cheat_button">Cheat!</string>
+    <string name="judgment_toast">CHEATING IS WRONG BZZT</string>
+
     <string name="question_australia">Canberra is the capital of Australia.</string>
     <string name="question_africa">The source of the Nile River is in Egypt.</string>
     <string name="question_americas">The Amazon River is the longest in Americas.</string>
