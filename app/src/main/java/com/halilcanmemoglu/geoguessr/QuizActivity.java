@@ -71,7 +71,8 @@ public class QuizActivity extends AppCompatActivity {
         });
 
 
-        mTrueButton = (Button) findViewById(R.id.true_button);
+        //mTrueButton = (Button) findViewById(R.id.true_button);
+        mTrueButton = (Button) findViewById(R.id.question_text_view);
         mTrueButton.setOnClickListener(new View.OnClickListener(){
             @Override
                 public void onClick(View v){
