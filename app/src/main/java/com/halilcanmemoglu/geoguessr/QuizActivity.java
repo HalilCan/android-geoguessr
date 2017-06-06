@@ -119,6 +119,12 @@ public class QuizActivity extends AppCompatActivity {
 
     private void updateQuestion() {
         Log.d(TAG, "Updating question text", new Exception());
+        int question = mQuestionBank[mCurrentIndex].getTextResId();
+        mQuestionTextView.setText(question);
+    }
+
+
+    private void checkAnswer(boolean userPressedTrue) {
         boolean answerIsTrue = mQuestionBank[mCurrentIndex].isAnswerTrue();
 
         int messageResId = 0;
