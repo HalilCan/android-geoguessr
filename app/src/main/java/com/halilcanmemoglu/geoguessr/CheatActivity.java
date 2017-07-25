@@ -17,10 +17,14 @@ import org.w3c.dom.Text;
 public class CheatActivity extends AppCompatActivity {
     private boolean mAnswerIsTrue;
     private TextView mAnswerTextView;
+    private TextView mBuildVersionView;
     private Button mShowAnswerButton;
 
+    private static final Integer API_LEVEL_INT = Build.VERSION.SDK_INT;
     private static final String EXTRA_ANSWER_IS_TRUE = "com.halilcanmemoglu.android.geoguessr.answer_is_true";
     private static final String EXTRA_ANSWER_SHOWN = "com.halilcanmemoglu.android.geoguessr.answer_shown";
+
+    private String mApiLevelReport = "API Level: " + Integer.toString(API_LEVEL_INT);
 
     public static Intent newIntent(Context packageContext, boolean answerIsTrue) {
         Intent intent = new Intent(packageContext, CheatActivity.class);
@@ -37,8 +41,13 @@ public class CheatActivity extends AppCompatActivity {
         mAnswerIsTrue = getIntent().getBooleanExtra(EXTRA_ANSWER_IS_TRUE, false);
 
         mAnswerTextView = (TextView) findViewById(R.id.answer_text_view);
+        mBuildVersionView = (TextView) findViewById(R.id.build_version_view);
 
         mShowAnswerButton = (Button) findViewById(R.id.show_answer_button);
+
+
+        mAnswerTextView.setText(mApiLevelReport);
+
         mShowAnswerButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
@@ -79,4 +88,6 @@ public class CheatActivity extends AppCompatActivity {
     public static boolean wasAnswerShown(Intent result) {
         return result.getBooleanExtra(EXTRA_ANSWER_SHOWN, false);
     }
+
+
 }
