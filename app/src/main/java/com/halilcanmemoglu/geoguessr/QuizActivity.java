@@ -34,6 +34,7 @@ public class QuizActivity extends AppCompatActivity {
     };
 
     private int mCurrentIndex = 0;
+    private int mCheatCount = 3;
     private boolean mIsCheater;
 
 
@@ -82,7 +83,9 @@ public class QuizActivity extends AppCompatActivity {
             public void onClick(View v) {
                 // Start CheatActivity
                 boolean answerIsTrue = mQuestionBank[mCurrentIndex].isAnswerTrue();
-                Intent intent = CheatActivity.newIntent(QuizActivity.this, answerIsTrue);
+                int cheatCount = mCheatCount;
+                Intent intent = CheatActivity.newIntent(QuizActivity.this, answerIsTrue, cheatCount);
+                intent.putExtra("cheatCount", cheatCount);
                 startActivityForResult(intent, REQUEST_CODE_CHEAT);
             }
         });

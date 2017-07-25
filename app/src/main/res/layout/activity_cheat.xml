@@ -32,6 +32,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="24dp"
+        android:id='@+id/cheat_count_view'/>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="26dp"
         android:id='@+id/build_version_view'/>
 
 </LinearLayout>

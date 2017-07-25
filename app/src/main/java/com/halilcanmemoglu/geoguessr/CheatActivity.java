@@ -19,17 +19,21 @@ public class CheatActivity extends AppCompatActivity {
     private TextView mAnswerTextView;
     private TextView mBuildVersionView;
     private Button mShowAnswerButton;
+    private TextView mCheatCountView;
+    private int mCheatCount;
 
     private static final Integer API_LEVEL_INT = Build.VERSION.SDK_INT;
     private static final String EXTRA_ANSWER_IS_TRUE = "com.halilcanmemoglu.android.geoguessr.answer_is_true";
     private static final String EXTRA_ANSWER_SHOWN = "com.halilcanmemoglu.android.geoguessr.answer_shown";
+    private static final int EXTRA_CHEAT_COUNT = 3;
 
     private String mApiLevelReport = "API Level: " + Integer.toString(API_LEVEL_INT);
+    private String mCheatCountReport = "";
 
-    public static Intent newIntent(Context packageContext, boolean answerIsTrue) {
+    public static Intent newIntent(Context packageContext, boolean answerIsTrue, int cheatCount) {
         Intent intent = new Intent(packageContext, CheatActivity.class);
         intent.putExtra(EXTRA_ANSWER_IS_TRUE, answerIsTrue);
-
+        intent.putExtra("cheatCount", cheatCount);
         return intent;
     }
 
@@ -39,14 +43,17 @@ public class CheatActivity extends AppCompatActivity {
         setContentView(R.layout.activity_cheat);
 
         mAnswerIsTrue = getIntent().getBooleanExtra(EXTRA_ANSWER_IS_TRUE, false);
+        mCheatCount = getIntent().getIntExtra("cheatCount", 0);
 
         mAnswerTextView = (TextView) findViewById(R.id.answer_text_view);
         mBuildVersionView = (TextView) findViewById(R.id.build_version_view);
+        mCheatCountView = (TextView) findViewById(R.id.cheat_count_view);
+        mCheatCountReport = "Cheats Left: " + Integer.toString(mCheatCount);
 
         mShowAnswerButton = (Button) findViewById(R.id.show_answer_button);
 
-
         mBuildVersionView.setText(mApiLevelReport);
+        mCheatCountView.setText(mCheatCountReport);
 
         mShowAnswerButton.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -75,6 +82,8 @@ public class CheatActivity extends AppCompatActivity {
                 } else {
                     mShowAnswerButton.setVisibility(View.INVISIBLE);
                 }
+                mCheatCount -= 1;
+                mCheatCountView.setText(mCheatCountReport);
             }
         });
     }
