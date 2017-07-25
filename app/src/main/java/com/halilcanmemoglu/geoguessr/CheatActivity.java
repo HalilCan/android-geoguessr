@@ -46,7 +46,7 @@ public class CheatActivity extends AppCompatActivity {
         mShowAnswerButton = (Button) findViewById(R.id.show_answer_button);
 
 
-        mAnswerTextView.setText(mApiLevelReport);
+        mBuildVersionView.setText(mApiLevelReport);
 
         mShowAnswerButton.setOnClickListener(new View.OnClickListener(){
             @Override
