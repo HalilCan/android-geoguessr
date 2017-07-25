@@ -34,7 +34,7 @@ public class QuizActivity extends AppCompatActivity {
     };
 
     private int mCurrentIndex = 0;
-    private int mCheatCount = 3;
+    private int mCheatCount = 99;
     private boolean mIsCheater;
 
 
