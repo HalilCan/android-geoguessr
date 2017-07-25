@@ -58,12 +58,16 @@ public class CheatActivity extends AppCompatActivity {
         mShowAnswerButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                if (mAnswerIsTrue) {
-                    mAnswerTextView.setText(R.string.true_button);
+                if (mCheatCount > 0) {
+                    if (mAnswerIsTrue) {
+                        mAnswerTextView.setText(R.string.true_button);
+                    } else {
+                        mAnswerTextView.setText(R.string.false_button);
+                    }
+                    setAnswerShownResult(true);
                 } else {
-                    mAnswerTextView.setText(R.string.false_button);
+                    setAnswerShownResult(false);
                 }
-                setAnswerShownResult(true);
 
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                     int cx = mShowAnswerButton.getWidth() / 2;
@@ -96,6 +100,16 @@ public class CheatActivity extends AppCompatActivity {
 
     public static boolean wasAnswerShown(Intent result) {
         return result.getBooleanExtra(EXTRA_ANSWER_SHOWN, false);
+    }
+
+    private void setCheatCount(int currentCheatCount) {
+        Intent data = new Intent();
+        data.putExtra("cheatCount", currentCheatCount - 1);
+        setResult(RESULT_OK, data);
+    }
+
+    public static int getCheatCount(Intent result) {
+        return result.getIntExtra("cheatCount", cheatCount);
     }
 
 

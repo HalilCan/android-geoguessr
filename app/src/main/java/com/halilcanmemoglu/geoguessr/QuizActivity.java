@@ -118,6 +118,7 @@ public class QuizActivity extends AppCompatActivity {
                 return;
             }
             mIsCheater = CheatActivity.wasAnswerShown(data);
+            mCheatCount = CheatActivity.getCheatCount(data);
         }
     }
 
